@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Música</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <h1>Criar Nova Música</h1>
+    <form action="/criar_musica" method="post">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required><br>
+        <label for="link_spotify">Link Spotify:</label>
+        <input type="text" id="link_spotify" name="link_spotify" required><br>
+        <label for="link_youtube">Link YouTube:</label>
+        <input type="text" id="link_youtube" name="link_youtube" required><br>
+        <label for="dia_preferencia">Dia de Preferência:</label>
+        <input type="text" id="dia_preferencia" name="dia_preferencia" required><br>
+        <button type="submit">Adicionar Música</button>
+    </form>
+    <a href="/">Voltar</a>
+</body>
+</html>
