@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +8,16 @@
 </head>
 <body>
     <h1>Lista de Músicas</h1>
+    <h2>Lista Completa de Músicas</h2>
     <ul>
         {% for musica in musicas %}
-        <li>{{ musica.nome }} - <a href="{{ musica.link_spotify }}">Spotify</a> | <a href="{{ musica.link_youtube }}">YouTube</a> - Preferência: {{ musica.dia_preferencia }}</li>
+        <li>{{ musica.nome }} - <a href="{{ musica.link_spotify }}">Spotify</a> | <a href="{{ musica.link_youtube }}">YouTube</a> - Preferência: Sexta: {{ musica.preferencia_sexta }}, Sábado: {{ musica.preferencia_sabado }}, Domingo: {{ musica.preferencia_domingo }}</li>
         {% endfor %}
     </ul>
     <a href="/criar_musica">Adicionar Nova Música</a>
+    <br><br>
+    <form action="/sortear_musicas_mes" method="post">
+        <button type="submit">Sortear Músicas para o Mês</button>
+    </form>
 </body>
 </html>

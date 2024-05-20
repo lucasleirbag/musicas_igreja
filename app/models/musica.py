@@ -9,13 +9,17 @@ class Musica(Base):
     nome = Column(String, index=True)
     link_spotify = Column(String, index=True)
     link_youtube = Column(String, index=True)
-    dia_preferencia = Column(String, index=True)
+    preferencia_sexta = Column(Integer, default=0)
+    preferencia_sabado = Column(Integer, default=0)
+    preferencia_domingo = Column(Integer, default=0)
 
 class MusicaBase(BaseModel):
     nome: str
     link_spotify: str
     link_youtube: str
-    dia_preferencia: str
+    preferencia_sexta: int
+    preferencia_sabado: int
+    preferencia_domingo: int
 
 class MusicaCreate(MusicaBase):
     pass

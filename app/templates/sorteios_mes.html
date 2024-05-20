@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteios do Mês</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sorteios do Mês</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Semana</th>
+                <th>Sexta-feira</th>
+                <th>Hinos da Ceia do Senhor</th>
+                <th>Domingo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for semana in range(1, 5) %}
+                <tr>
+                    <td>Semana {{ semana }}</td>
+                    <td>
+                        <ul>
+                            {% for sorteio in sorteios_do_mes %}
+                                {% if sorteio[0] == semana and sorteio[1] == 'sexta' %}
+                                    <li>{{ sorteio[2] }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            {% for sorteio in sorteios_do_mes %}
+                                {% if sorteio[0] == semana and sorteio[1] == 'hinos_da_ceia' %}
+                                    <li>{{ sorteio[2] }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            {% for sorteio in sorteios_do_mes %}
+                                {% if sorteio[0] == semana and sorteio[1] == 'domingo' %}
+                                    <li>{{ sorteio[2] }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/">Voltar para a lista de músicas</a>
+</body>
+</html>
