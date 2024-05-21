@@ -1,34 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Músicas</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-</head>
-<body>
-    <h1>Lista de Músicas</h1>
-    {% if message %}
-        <p>{{ message }}</p>
-    {% endif %}
-    <ul>
+{% extends "base.html" %}
+
+{% block title %}Lista de Músicas{% endblock %}
+
+{% block content %}
+<h1>Lista de Músicas</h1>
+{% if message %}
+    <div class="card-panel teal lighten-2">{{ message }}</div>
+{% endif %}
+<table class="highlight centered responsive-table">
+    <thead>
+        <tr>
+            <th>Música</th>
+            <th>Spotify</th>
+            <th>YouTube</th>
+            <th>Sexta</th>
+            <th>Sábado</th>
+            <th>Domingo</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for musica in musicas %}
-        <li>
-            {{ musica.nome }} - 
-            <a href="{{ musica.link_spotify }}">Spotify</a> | 
-            <a href="{{ musica.link_youtube }}">YouTube</a> - 
-            Preferência: Sexta: {{ musica.preferencia_sexta }}, Sábado: {{ musica.preferencia_sabado }}, Domingo: {{ musica.preferencia_domingo }}
-            <a href="/editar_musica/{{ musica.id }}">Editar</a>
-            <form action="/excluir_musica/{{ musica.id }}" method="post" style="display:inline;">
-                <button type="submit">Excluir</button>
-            </form>
-        </li>
+        <tr>
+            <td data-label="Nome da Música">{{ musica.nome }}</td>
+            <td data-label="Link Spotify"><a href="{{ musica.link_spotify }}" class="waves-effect waves-light btn-small green"><i class="fab fa-spotify"></i></a></td>
+            <td data-label="Link YouTube"><a href="{{ musica.link_youtube }}" class="waves-effect waves-light btn-small red"><i class="fab fa-youtube"></i></a></td>
+            <td data-label="Preferência Sexta">
+                {% if musica.preferencia_sexta == 1 %}
+                    <i class="fa-regular fa-circle-check" style="color: green;"></i>
+                {% elif musica.preferencia_sexta == 0 %}
+                    <i class="fa-solid fa-circle-xmark" style="color: red;"></i>
+                {% else %}
+                    {{ musica.preferencia_sexta }}
+                {% endif %}
+            </td>
+            <td data-label="Preferência Sábado">
+                {% if musica.preferencia_sabado == 1 %}
+                    <i class="fa-regular fa-circle-check" style="color: green;"></i>
+                {% elif musica.preferencia_sabado == 0 %}
+                    <i class="fa-solid fa-circle-xmark" style="color: red;"></i>
+                {% else %}
+                    {{ musica.preferencia_sabado }}
+                {% endif %}
+            </td>
+            <td data-label="Preferência Domingo">
+                {% if musica.preferencia_domingo == 1 %}
+                    <i class="fa-regular fa-circle-check" style="color: green;"></i>
+                {% elif musica.preferencia_domingo == 0 %}
+                    <i class="fa-solid fa-circle-xmark" style="color: red;"></i>
+                {% else %}
+                    {{ musica.preferencia_domingo }}
+                {% endif %}
+            </td>
+            <td data-label="Ações">
+                <a href="/editar_musica/{{ musica.id }}" class="waves-effect waves-light btn-small blue">Editar</a>
+                <form action="/excluir_musica/{{ musica.id }}" method="post" style="display:inline;">
+                    <button type="submit" class="waves-effect waves-light btn-small red">Excluir</button>
+                </form>
+            </td>
+        </tr>
         {% endfor %}
-    </ul>
-    <a href="/criar_musica">Adicionar Nova Música</a>
-    <br><br>
+    </tbody>
+</table>
+<div class="section">
+    <a href="/criar_musica" class="waves-effect waves-light btn green">Adicionar Nova Música</a>
+</div>
+<div class="section">
     <form action="/sortear_musicas_mes" method="post">
-        <button type="submit">Sortear Músicas</button>
+        <button type="submit" class="waves-effect waves-light btn blue">Sortear Músicas</button>
     </form>
-</body>
-</html>
+</div>
+{% endblock %}

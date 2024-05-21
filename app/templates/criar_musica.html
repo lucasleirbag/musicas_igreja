@@ -1,31 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if musica %}Editar{% else %}Criar{% endif %} Música</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-</head>
-<body>
-    <h1>{% if musica %}Editar{% else %}Criar{% endif %} Música</h1>
-    {% if message %}
-        <p>{{ message }}</p>
-    {% endif %}
-    <form action="{% if musica %}/editar_musica/{{ musica.id }}{% else %}/criar_musica{% endif %}" method="post">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" value="{{ musica.nome if musica else '' }}" required><br>
-        <label for="link_spotify">Link Spotify:</label>
-        <input type="text" id="link_spotify" name="link_spotify" value="{{ musica.link_spotify if musica else '' }}" required><br>
-        <label for="link_youtube">Link YouTube:</label>
-        <input type="text" id="link_youtube" name="link_youtube" value="{{ musica.link_youtube if musica else '' }}" required><br>
-        <label for="preferencia_sexta">Preferência Sexta:</label>
-        <input type="checkbox" id="preferencia_sexta" name="preferencia_sexta" value="1" {% if musica and musica.preferencia_sexta %}checked{% endif %}><br>
-        <label for="preferencia_sabado">Preferência Sábado:</label>
-        <input type="checkbox" id="preferencia_sabado" name="preferencia_sabado" value="1" {% if musica and musica.preferencia_sabado %}checked{% endif %}><br>
-        <label for="preferencia_domingo">Preferência Domingo:</label>
-        <input type="checkbox" id="preferencia_domingo" name="preferencia_domingo" value="1" {% if musica and musica.preferencia_domingo %}checked{% endif %}><br>
-        <button type="submit">Salvar</button>
+{% extends "base.html" %}
+
+{% block title %}{% if musica %}Editar{% else %}Criar{% endif %} Música{% endblock %}
+
+{% block content %}
+<h1>{% if musica %}Editar{% else %}Criar{% endif %} Música</h1>
+{% if message %}
+    <div class="card-panel teal lighten-2">{{ message }}</div>
+{% endif %}
+<div class="row">
+    <form class="col s12" action="{% if musica %}/editar_musica/{{ musica.id }}{% else %}/criar_musica{% endif %}" method="post">
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="nome" type="text" name="nome" value="{{ musica.nome if musica else '' }}" required>
+                <label for="nome">Nome</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="link_spotify" type="text" name="link_spotify" value="{{ musica.link_spotify if musica else '' }}" required>
+                <label for="link_spotify">Link Spotify</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="link_youtube" type="text" name="link_youtube" value="{{ musica.link_youtube if musica else '' }}" required>
+                <label for="link_youtube">Link YouTube</label>
+            </div>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="filled-in" name="preferencia_sexta" value="1" {% if musica and musica.preferencia_sexta %}checked{% endif %}>
+                <span>Preferência Sexta</span>
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="filled-in" name="preferencia_sabado" value="1" {% if musica and musica.preferencia_sabado %}checked{% endif %}>
+                <span>Preferência Sábado</span>
+            </label>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" class="filled-in" name="preferencia_domingo" value="1" {% if musica and musica.preferencia_domingo %}checked{% endif %}>
+                <span>Preferência Domingo</span>
+            </label>
+        </div>
+        <button type="submit" class="waves-effect waves-light btn blue">Salvar</button>
     </form>
-    <a href="/">Voltar para a lista de músicas</a>
-</body>
-</html>
+</div>
+<a href="/" class="waves-effect waves-light btn">Voltar para a lista de músicas</a>
+{% endblock %}

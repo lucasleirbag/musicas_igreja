@@ -1,55 +1,69 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
 }
 
 h1 {
-    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+.card-panel {
+    margin-bottom: 20px;
 }
 
-li {
-    margin: 10px 0;
+table {
+    width: 100%;
+    margin-bottom: 20px;
 }
 
-a {
-    color: #0066cc;
+thead {
+    background-color: #f4f4f4;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+.btn-small {
+    margin-right: 5px;
+}
+
+.bloco {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.bloco h2 {
+    margin-top: 0;
+}
+
+.musica {
+    margin-bottom: 10px;
+}
+
+.link {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.btn-back {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    text-align: center;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
     text-decoration: none;
 }
 
-a:hover {
-    text-decoration: underline;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    margin: 5px 0 2px;
-}
-
-input {
-    margin: 0 0 10px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-button {
-    padding: 10px;
-    border: none;
-    border-radius: 3px;
-    background-color: #0066cc;
-    color: white;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #005bb5;
+.btn-back:hover {
+    background-color: #0056b3;
 }
