@@ -6,66 +6,76 @@
     <title>Sorteios do Mês</title>
     <link rel="stylesheet" href="/static/css/styles.css">
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
+        .bloco {
             border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
         }
-        th {
-            background-color: #f2f2f2;
+        .bloco h2 {
+            margin-top: 0;
+        }
+        .musica {
+            margin-bottom: 10px;
+        }
+        .link {
+            display: block;
+            margin-bottom: 5px;
         }
     </style>
 </head>
 <body>
     <h1>Sorteios do Mês</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Semana</th>
-                <th>Sexta-feira</th>
-                <th>Hinos da Ceia do Senhor</th>
-                <th>Domingo</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for semana in range(1, 5) %}
-                <tr>
-                    <td>Semana {{ semana }}</td>
-                    <td>
-                        <ul>
-                            {% for sorteio in sorteios_do_mes %}
-                                {% if sorteio[0] == semana and sorteio[1] == 'sexta' %}
-                                    <li>{{ sorteio[2] }}</li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </td>
-                    <td>
-                        <ul>
-                            {% for sorteio in sorteios_do_mes %}
-                                {% if sorteio[0] == semana and sorteio[1] == 'hinos_da_ceia' %}
-                                    <li>{{ sorteio[2] }}</li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </td>
-                    <td>
-                        <ul>
-                            {% for sorteio in sorteios_do_mes %}
-                                {% if sorteio[0] == semana and sorteio[1] == 'domingo' %}
-                                    <li>{{ sorteio[2] }}</li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </td>
-                </tr>
+    {% for semana in range(1, 5) %}
+        <div class="bloco">
+            <h2>Semana {{ semana }}</h2>
+            <h3>Sexta-feira</h3>
+            <ul>
+                {% for sorteio in sorteios_do_mes %}
+                    {% if sorteio[0] == semana and sorteio[1] == 'sexta' %}
+                        {% for nome, link_spotify, link_youtube in sorteio[2] %}
+                            <li class="musica">
+                                {{ nome }}
+                                <a href="{{ link_spotify }}" class="link">Spotify</a>
+                                <a href="{{ link_youtube }}" class="link">YouTube</a>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <h3>Domingo</h3>
+            <ul>
+                {% for sorteio in sorteios_do_mes %}
+                    {% if sorteio[0] == semana and sorteio[1] == 'domingo' %}
+                        {% for nome, link_spotify, link_youtube in sorteio[2] %}
+                            <li class="musica">
+                                {{ nome }}
+                                <a href="{{ link_spotify }}" class="link">Spotify</a>
+                                <a href="{{ link_youtube }}" class="link">YouTube</a>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+    <div class="bloco">
+        <h2>Ceia do Senhor</h2>
+        <ul>
+            {% for sorteio in sorteios_do_mes %}
+                {% if sorteio[1] == 'hinos_da_ceia' %}
+                    {% for nome, link_spotify, link_youtube in sorteio[2] %}
+                        <li class="musica">
+                            {{ nome }}
+                            <a href="{{ link_spotify }}" class="link">Spotify</a>
+                            <a href="{{ link_youtube }}" class="link">YouTube</a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
             {% endfor %}
-        </tbody>
-    </table>
+        </ul>
+    </div>
     <a href="/">Voltar para a lista de músicas</a>
 </body>
 </html>
