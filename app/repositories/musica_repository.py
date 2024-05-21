@@ -14,12 +14,9 @@ class MusicaRepository:
     def obter_todas(self):
         return self.db.query(Musica).all()
 
-    def obter_por_dia(self, dia_preferencia: str):
-        return self.db.query(Musica).filter(Musica.dia_preferencia == dia_preferencia).all()
+    def obter_por_id(self, musica_id: int):
+        return self.db.query(Musica).filter(Musica.id == musica_id).first()
 
-    def deletar(self, musica_id: int):
-        musica = self.db.query(Musica).filter(Musica.id == musica_id).first()
-        if musica:
-            self.db.delete(musica)
-            self.db.commit()
-        return musica
+    def excluir(self, musica: Musica):
+        self.db.delete(musica)
+        self.db.commit()

@@ -8,16 +8,27 @@
 </head>
 <body>
     <h1>Lista de Músicas</h1>
-    <h2>Lista Completa de Músicas</h2>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
     <ul>
         {% for musica in musicas %}
-        <li>{{ musica.nome }} - <a href="{{ musica.link_spotify }}">Spotify</a> | <a href="{{ musica.link_youtube }}">YouTube</a> - Preferência: Sexta: {{ musica.preferencia_sexta }}, Sábado: {{ musica.preferencia_sabado }}, Domingo: {{ musica.preferencia_domingo }}</li>
+        <li>
+            {{ musica.nome }} - 
+            <a href="{{ musica.link_spotify }}">Spotify</a> | 
+            <a href="{{ musica.link_youtube }}">YouTube</a> - 
+            Preferência: Sexta: {{ musica.preferencia_sexta }}, Sábado: {{ musica.preferencia_sabado }}, Domingo: {{ musica.preferencia_domingo }}
+            <a href="/editar_musica/{{ musica.id }}">Editar</a>
+            <form action="/excluir_musica/{{ musica.id }}" method="post" style="display:inline;">
+                <button type="submit">Excluir</button>
+            </form>
+        </li>
         {% endfor %}
     </ul>
     <a href="/criar_musica">Adicionar Nova Música</a>
     <br><br>
     <form action="/sortear_musicas_mes" method="post">
-        <button type="submit">Sortear Músicas para o Mês</button>
+        <button type="submit">Sortear Músicas</button>
     </form>
 </body>
 </html>

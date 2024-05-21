@@ -78,3 +78,10 @@ class MusicaService:
 
     def criar_musica(self, musica: Musica):
         return self.musica_repository.criar(musica)
+
+    def atualizar_musica(self, musica: Musica):
+        self.musica_repository.db.commit()
+
+    def excluir_musica(self, musica: Musica):
+        self.musica_repository.db.delete(musica)
+        self.musica_repository.db.commit()
