@@ -67,6 +67,8 @@ async def sortear_musicas_mes(request: Request, db: Session = Depends(get_db)):
     mes_atual = datetime.now().month
     ano_atual = datetime.now().year
     sorteios_do_mes = musica_service.gerar_sorteios_para_o_mes(mes_atual, ano_atual)
+    if sorteios_do_mes is None:
+        sorteios_do_mes = []
     return templates.TemplateResponse("sorteios_mes.html", {
         "request": request,
         "sorteios_do_mes": sorteios_do_mes

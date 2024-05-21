@@ -34,7 +34,7 @@
             <ul>
                 {% for sorteio in sorteios_do_mes %}
                     {% if sorteio[0] == semana and sorteio[1] == 'sexta' %}
-                        {% for nome, link_spotify, link_youtube in sorteio[2] %}
+                        {% for id, nome, link_spotify, link_youtube in sorteio[2] %}
                             <li class="musica">
                                 {{ nome }}
                                 <a href="{{ link_spotify }}" class="link">Spotify</a>
@@ -48,7 +48,7 @@
             <ul>
                 {% for sorteio in sorteios_do_mes %}
                     {% if sorteio[0] == semana and sorteio[1] == 'domingo' %}
-                        {% for nome, link_spotify, link_youtube in sorteio[2] %}
+                        {% for id, nome, link_spotify, link_youtube in sorteio[2] %}
                             <li class="musica">
                                 {{ nome }}
                                 <a href="{{ link_spotify }}" class="link">Spotify</a>
@@ -65,7 +65,7 @@
         <ul>
             {% for sorteio in sorteios_do_mes %}
                 {% if sorteio[1] == 'hinos_da_ceia' %}
-                    {% for nome, link_spotify, link_youtube in sorteio[2] %}
+                    {% for id, nome, link_spotify, link_youtube in sorteio[2] %}
                         <li class="musica">
                             {{ nome }}
                             <a href="{{ link_spotify }}" class="link">Spotify</a>

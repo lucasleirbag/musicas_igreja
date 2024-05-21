@@ -8,12 +8,13 @@ class MusicaService:
     def __init__(self, musica_repository: MusicaRepository):
         self.musica_repository = musica_repository
 
-    def escolher_musicas(self, dia: str, quantidade: int, semana: int, mes: int, ano: int):
+    def escolher_musicas(self, dia: str, quantidade: int, semana: int, mes: int, ano: int, excluidos: list):
         # Obter IDs das músicas disponíveis para sorteio (status diferente de 0 ou 1)
         musicas_disponiveis = self.musica_repository.db.query(Musica).filter(
             Musica.id.notin_(
                 self.musica_repository.db.query(Sorteio.musica_id).filter(Sorteio.status.in_([0, 1]))
-            )
+            ),
+            Musica.id.notin_(excluidos)
         ).all()
 
         if len(musicas_disponiveis) < quantidade:
@@ -36,14 +37,16 @@ class MusicaService:
 
         self.musica_repository.db.commit()
 
-        return [(musica.nome, musica.link_spotify, musica.link_youtube) for musica in musicas_sorteadas]
+        return [(musica.id, musica.nome, musica.link_spotify, musica.link_youtube) for musica in musicas_sorteadas]
 
     def gerar_sorteios_para_o_mes(self, mes: int, ano: int):
         sorteios_do_mes = []
 
         for semana in range(1, 5):
+            excluidos = []
             for dia in ['sexta', 'domingo']:
-                musicas_sorteadas = self.escolher_musicas(dia, 2, semana, mes, ano)
+                musicas_sorteadas = self.escolher_musicas(dia, 2, semana, mes, ano, excluidos)
+                excluidos.extend([musica[0] for musica in musicas_sorteadas])
                 sorteios_do_mes.append((semana, dia, musicas_sorteadas))
             
             # Atualizar status das músicas sorteadas na semana atual
@@ -68,7 +71,7 @@ class MusicaService:
             self.musica_repository.db.commit()
 
         # Sortear hinos para um sábado específico (ceia do Senhor)
-        hinos_sabado = self.escolher_musicas('hinos_da_ceia', 2, 5, mes, ano)
+        hinos_sabado = self.escolher_musicas('hinos_da_ceia', 2, 5, mes, ano, [])
         sorteios_do_mes.append((5, 'hinos_da_ceia', hinos_sabado))
 
         return sorteios_do_mes
