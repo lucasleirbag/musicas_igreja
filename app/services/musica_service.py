@@ -82,6 +82,9 @@ class MusicaService:
     def atualizar_musica(self, musica: Musica):
         self.musica_repository.db.commit()
 
-    def excluir_musica(self, musica: Musica):
-        self.musica_repository.db.delete(musica)
-        self.musica_repository.db.commit()
+    def excluir_musica(self, musica_id: int):
+        musica = self.musica_repository.obter_por_id(musica_id)
+        if musica:
+            self.musica_repository.db.delete(musica)
+            self.musica_repository.db.commit()
+

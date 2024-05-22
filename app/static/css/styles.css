@@ -31,39 +31,26 @@ th, td {
     margin-right: 5px;
 }
 
-.bloco {
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+.collection-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.bloco h2 {
-    margin-top: 0;
+.secondary-content a {
+    margin-left: 10px;
 }
 
-.musica {
-    margin-bottom: 10px;
+.modal {
+    max-width: 90%;
+    width: 90%;
 }
 
-.link {
-    display: inline-block;
-    margin-right: 10px;
+.modal-content {
+    padding: 20px;
 }
 
-.btn-back {
-    display: block;
-    width: 200px;
-    margin: 20px auto;
-    text-align: center;
+.modal-footer {
     padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-.btn-back:hover {
-    background-color: #0056b3;
+    text-align: right;
 }
